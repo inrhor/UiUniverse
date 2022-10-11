@@ -1,0 +1,32 @@
+#                    #
+# QuestEngine 任务笔记 #
+#                    #
+
+# 点击任务后显示目标
+
+target-doing:
+  title: 任务笔记 | {{quest name}} [{{ui page}}]
+  # 模板
+  template: list
+  # 备注，多页槽位数据来自home.yml的list节点
+  # 为多页物品统一样式
+  icon:
+    material: PAPER
+    name: "&f"
+    lore:
+      - "__QenQuestNote__"
+      - ""
+    script: |
+      ui open target-doing namespace qen
+
+target-complete:
+  title: 任务笔记 | 章节 [{{ui page}}]
+  template: list
+  icon:
+    material: PAPER
+    name: "&f"
+    lore:
+      - "__QenQuestNote__"
+      - ""
+    script: |
+      ui open target-complete namespace qen

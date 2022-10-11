@@ -1,0 +1,27 @@
+#                    #
+# QuestEngine 任务笔记 #
+#                    #
+
+home:
+  title: "任务笔记 | 主页"
+  # 继承模板
+  template: home
+  button:
+    - id: doing
+      slot: 10
+      material: BOOK
+      name: "&f"
+      lore:
+        - "&f进行中的任务"
+        - ""
+      script: |
+        ui open group-doing namespace qen
+    - id: comple
+        slot: 12
+        material: BOOK
+        name: "&f"
+        lore:
+          - "&f存档任务"
+          - ""
+        script: |
+          ui open group-complete namespace qen

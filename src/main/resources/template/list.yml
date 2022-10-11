@@ -1,0 +1,32 @@
+# 模板编号
+list:
+  # 行
+  rows: 6
+  # 多页槽位
+  slots: [
+      10, 11, 12, 13, 14, 15, 16
+      19, 20, 21, 22, 23, 24, 25
+      28, 29, 30, 31, 32, 33, 34
+  ]
+  # 按钮
+  button:
+    - id: back
+      slot: 8
+      material: BARRIER
+      name: "&f&l返回"
+      script: ui back
+    - id: close
+      slot: 49
+      material: BARRIER
+      name: "&c&l关闭"
+      script: ui close
+    - id: previous
+      slot: 48
+      material: SLIME_BALL
+      name: "&a&l上一页"
+      run: previous
+    - id: next
+      slot: 50
+      material: SLIME_BALL
+      name: "&a&l下一页"
+      run: next

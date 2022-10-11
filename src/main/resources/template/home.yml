@@ -1,0 +1,10 @@
+# 模板编号
+home:
+  # 行
+  rows: 6
+  # 按钮
+  button:
+    - id: close
+      slot: 49
+      material: BARRIER
+      name: "&c&l关闭"

@@ -1,0 +1,32 @@
+#                    #
+# QuestEngine 任务笔记 #
+#                    #
+
+# 主页点开后显示各状态任务组
+
+group-doing:
+  title: 任务笔记 | 进行中任务组 [{{ui page}}]
+  # 模板
+  template: list
+  # 备注，多页槽位数据来自home.yml的list节点
+  # 为多页物品统一样式
+  icon:
+    material: BOOK
+    name: "&f"
+    lore:
+      - "__QenGroupNote__"
+      - ""
+    script: |
+      ui open quest-doing namespace qen
+
+group-complete:
+  title: 任务笔记 | 存档任务组 [{{ui page}}]
+  template: list
+  icon:
+    material: BOOK
+    name: "&f"
+    lore:
+      - "__QenGroupNote__"
+      - ""
+    script: |
+      ui open quest-complete namespace qen
