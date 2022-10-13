@@ -7,11 +7,13 @@ object PluginLoader {
 
     @Awake(LifeCycle.ENABLE)
     fun onEnable() {
+        Loader.logo("a")
         Loader.loadTask()
     }
 
     @Awake(LifeCycle.DISABLE)
     fun onDisable() {
+        Loader.logo("c")
         Loader.unloadTask()
     }
 
