@@ -1,6 +1,7 @@
 package com.github.inrhor.uiUniverse.common.kether.action
 
 import com.github.inrhor.uiUniverse.api.manager.UiManager.openUi
+import com.github.inrhor.uiUniverse.common.kether.backUi
 import com.github.inrhor.uiUniverse.common.kether.getUiPage
 import com.github.inrhor.uiUniverse.common.kether.getUiVariables
 import com.github.inrhor.uiUniverse.common.kether.player
@@ -23,6 +24,11 @@ object UiAction {
             case("close") {
                 actionNow {
                     player().closeInventory()
+                }
+            }
+            case("back") {
+                actionNow {
+                    player().openUi(backUi())
                 }
             }
             case("open") {

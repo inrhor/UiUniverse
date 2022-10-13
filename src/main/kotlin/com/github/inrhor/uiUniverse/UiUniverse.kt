@@ -1,7 +1,6 @@
 package com.github.inrhor.uiUniverse
 
 import taboolib.common.platform.Plugin
-import taboolib.common.platform.function.info
 import taboolib.platform.BukkitIO
 import taboolib.platform.BukkitPlugin
 

@@ -20,8 +20,15 @@ quest-doing:
         - ""
     script: |
       ui open target-doing namespace qen
+  button:
+    - id: back
+      slot: 8
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+      script: ui open group-doing namespace qen
 
-group-complete:
+quest-complete:
   title: 任务笔记 | 章节 [{{ui page}}]
   template: list
   data: qen_quest_complete
@@ -34,3 +41,10 @@ group-complete:
         - ""
     script: |
       ui open target-complete namespace qen
+  button:
+    - id: back
+      slot: 8
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+      script: ui open group-complete namespace qen

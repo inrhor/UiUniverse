@@ -10,12 +10,6 @@ list:
   ]
   # 按钮
   button:
-    - id: back
-      slot: 8
-      item:
-        material: BARRIER
-        name: "&f&l返回"
-        script: ui back
     - id: close
       slot: 49
       item:

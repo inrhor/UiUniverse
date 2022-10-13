@@ -15,7 +15,6 @@ import com.github.inrhor.uiUniverse.common.kether.eval
 import com.github.inrhor.uiUniverse.common.kether.evalString
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import taboolib.common.platform.function.info
 import taboolib.common.util.setSafely
 import taboolib.library.xseries.XMaterial
 import taboolib.module.kether.ScriptContext
@@ -35,7 +34,7 @@ class UiQuest(
             "qen_group_complete" -> openGroupList(player, StateType.FINISH)
             "qen_quest_doing" -> openQuests(player, any[0] as String, StateType.DOING)
             "qen_quest_complete" -> openQuests(player, any[0] as String, StateType.FINISH)
-            "qen_target" -> openTargets(player, any[0] as QuestData)
+            "qen_target" -> openTargets(player, any[0] as QuestData, any[1] as String)
             else -> openBasic(player)
         }
     }
@@ -68,9 +67,7 @@ class UiQuest(
         }
         scriptButton.forEach {
             set(it.slot, it.item.itemStack(player, variable)) {
-                player.eval(it.script) { s ->
-                    s.rootFrame().variables()["@UiPage"] = page
-                }
+                player.eval(it.script, variable)
             }
         }
     }
@@ -112,25 +109,42 @@ class UiQuest(
         it.rootFrame().variables()["@QenGroupID"] = groupFrame.id
     }
 
+    private fun groupList(player: Player, state: StateType): List<GroupFrame> {
+        val group = mutableMapOf<String, GroupFrame>()
+        if (state == StateType.FINISH) {
+            QuestManager.groupMap.forEach { (t, u) ->
+                if (group.containsKey(t)) return@forEach
+                for (i in 0 until u.quests.size) {
+                    val qf = u.quests[i]
+                    val q = player.questData(qf.id)?: break
+                    if (q.state != state) {
+                        group.remove(t)
+                        break
+                    }else {
+                        group[t] = u
+                    }
+                }
+            }
+        }else {
+            QuestManager.groupMap.forEach { (t, u) ->
+                if (group.containsKey(t)) return@forEach
+                u.quests.forEach { i ->
+                    val q = player.questData(i.id)
+                    if (q?.state == state) group[t] = u
+                }
+            }
+        }
+        return group.values.toMutableList()
+    }
+
     /**
      * 浏览任务组集合
      */
     fun openGroupList(player: Player, state: StateType) {
-        val group = mutableMapOf<String, GroupFrame>()
-        QuestManager.groupMap.forEach { (t, u) ->
-            if (group.containsKey(t)) return@forEach
-            u.quests.forEach { i ->
-                val q = player.questData(i.id)
-                if (q?.state == state) group[t] = u
-            }
-        }
         player.openMenu<Linked<GroupFrame>>(player.evalString(title)) {
             linkedButton(player) {}
-            group.values.forEach {
-                info(it.name)
-            }
             elements {
-                group.values.toList()
+                groupList(player, state)
             }
             onGenerate(true) { player, element, _, _ ->
                 iconButton(player, element.data, element.note, "__QenGroupNote__") {
@@ -185,7 +199,7 @@ class UiQuest(
             onClick { event, element ->
                 event.clicker.eval(icon.script) { s ->
                     questVar(s, element.id)
-                    val any = arrayOf<Any>(element)
+                    val any = arrayOf(element, group)
                     s.rootFrame().variables().set("__UiListData__", any)
                     s.rootFrame().variables()["@UiPage"] = page
                 }
@@ -202,12 +216,14 @@ class UiQuest(
     /**
      * 浏览目标集合
      */
-    fun openTargets(player: Player, questData: QuestData) {
+    fun openTargets(player: Player, questData: QuestData, group: String) {
         val quest = questData.id
         player.openMenu<Linked<TargetData>>(player.evalString(title) {
             questVar(it, quest)
         }) {
             linkedButton(player) {
+                val any = arrayOf<Any>(group)
+                it.rootFrame().variables().set("__UiListData__", any)
                 questVar(it, quest)
             }
             elements {
@@ -221,7 +237,19 @@ class UiQuest(
                 }
             }
             onClick { event, element ->
-                event.clicker.eval(icon.script) { s ->
+                val t = element.id.getTargetFrame(element.questID)
+                var ts = icon.script
+                if (ts.uppercase().contains("__QENTARGETSCRIPT__")) {
+                    t?.data?.forEach {
+                        val s = it.uppercase()
+                        if (s.contains("SCRIPT:")) {
+                            val s1 = it.substring(0, s.indexOf(":"))
+                            ts = ts.replace("__QENTARGETSCRIPT__",
+                                it.substring(s1.length+1, it.length), true)
+                        }
+                    }
+                }
+                event.clicker.eval(ts) { s ->
                     targetVar(s, element.id, quest)
                     s.rootFrame().variables()["@UiPage"] = page
                 }

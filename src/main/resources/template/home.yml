@@ -9,3 +9,4 @@ home:
       item:
         material: BARRIER
         name: "&c&l关闭"
+      script: ui close

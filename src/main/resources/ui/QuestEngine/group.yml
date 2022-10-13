@@ -20,6 +20,13 @@ group-doing:
         - ""
     script: |
       ui open quest-doing namespace qen
+  button:
+    - id: back
+      slot: 8
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+      script: ui open home namespace qen
 
 group-complete:
   title: 任务笔记 | 存档任务组 [{{ui page}}]
@@ -34,3 +41,10 @@ group-complete:
         - ""
     script: |
       ui open quest-complete namespace qen
+  button:
+    - id: back
+      slot: 8
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+      script: ui open home namespace qen

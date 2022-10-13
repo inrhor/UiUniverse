@@ -18,6 +18,13 @@ target-doing:
       lore:
         - "__QenTargetNote__"
         - ""
+  button:
+    - id: back
+      slot: 8
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+      script: ui open quest-doing namespace qen
 
 target-complete:
   title: 任务笔记 | 章节 [{{ui page}}]
@@ -30,3 +37,10 @@ target-complete:
       lore:
         - "__QenTargetNote__"
         - ""
+  button:
+    - id: back
+      slot: 8
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+      script: ui open quest-complete namespace qen
