@@ -17,16 +17,26 @@ fun Player.eval(script: String, variable: (ScriptContext) -> Unit, get: (Any?) -
     }.getNow(def)
 }
 
-fun Player.eval(script: String) {
-    eval(script, {}, {Coerce.toBoolean(it)}, true)
+fun Player.eval(script: String, variable: (ScriptContext) -> Unit): Any {
+    return KetherShell.eval(script, sender = adaptPlayer(this)) {
+        variable(this)
+    }.thenApply {
+        Coerce.toBoolean(it)
+    }.getNow(true)
 }
 
-fun Player.evalString(script: String): String {
+fun Player.eval(script: String) {
+    eval(script) {}
+}
+
+fun Player.evalString(script: String, variable: (ScriptContext) -> Unit): String {
     var text = script
     script.variableReader().forEach { e ->
-        text = text.replace("{{$e}}", eval(e, {}, {
+        text = text.replace("{{$e}}", eval(e, {variable(it)}, {
             Coerce.toString(it)
         }, script).toString())
     }
     return text.replacePlaceholder(this).colored()
 }
+
+fun Player.evalString(script: String) = evalString(script) {}

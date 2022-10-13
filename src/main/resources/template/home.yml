@@ -6,5 +6,6 @@ home:
   button:
     - id: close
       slot: 49
-      material: BARRIER
-      name: "&c&l关闭"
+      item:
+        material: BARRIER
+        name: "&c&l关闭"

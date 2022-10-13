@@ -7,6 +7,7 @@ import org.bukkit.Bukkit
 object Loader {
 
     fun loadTask() {
+        FileLoad.loadTemplate()
         FileLoad.loadQuestEngine()
     }
 

@@ -12,21 +12,25 @@ list:
   button:
     - id: back
       slot: 8
-      material: BARRIER
-      name: "&f&l返回"
-      script: ui back
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+        script: ui back
     - id: close
       slot: 49
-      material: BARRIER
-      name: "&c&l关闭"
+      item:
+        material: BARRIER
+        name: "&c&l关闭"
       script: ui close
     - id: previous
       slot: 48
-      material: SLIME_BALL
-      name: "&a&l上一页"
+      item:
+        material: SLIME_BALL
+        name: "&a&l上一页"
       run: previous
     - id: next
       slot: 50
-      material: SLIME_BALL
-      name: "&a&l下一页"
+      item:
+        material: SLIME_BALL
+        name: "&a&l下一页"
       run: next
