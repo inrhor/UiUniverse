@@ -3,3 +3,13 @@ LOADER_INFO:
   - "&7[ &ci &7]&r  ┝  &3当前插件版本  &f{1}"
 TEMPLATE_EMPTY_FILE: "&c模板配置文件夹不存在，现在新建示例配置"
 QEN_EMPTY_FILE: "&c任务笔记配置文件夹不存在，现在新建示例配置"
+
+INPUT_CHAT_RENAME:
+  - "&f"
+  - "    &c请在聊天框输入宠物的新名称"
+  - "&f"
+
+INPUT_CHAT_DOUBLE:
+  - "&f"
+  - "    &c请在聊天框输入数字"
+  - "&f"

@@ -15,6 +15,7 @@ taboolib {
     install("module-chat")
     install("module-ui")
     install("platform-bukkit")
+    install("expansion-javascript")
     install("expansion-command-helper")
     classifier = null
     version = "6.0.9-114"
@@ -29,7 +30,8 @@ dependencies {
     compileOnly("ink.ptms:nms-all:1.0.0")
     compileOnly("ink.ptms.core:v11902:11902-minimize:mapped")
     compileOnly("ink.ptms.core:v11902:11902-minimize:universal")
-    compileOnly("com.github.inrhor:QuestEngine:2.6.0-3")
+    compileOnly("com.github.inrhor:QuestEngine:3.0.0-beta5")
+    compileOnly("com.github.inrhor:imiPetCore:0.8.1-1")
     compileOnly(kotlin("stdlib"))
     compileOnly(fileTree("libs"))
 }

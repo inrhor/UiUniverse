@@ -23,6 +23,7 @@ object Loader {
         console().sendLang("LOADER_INFO", pluginCon.name, pluginCon.version)
         FileLoad.loadTemplate()
         FileLoad.loadQuestEngine()
+        FileLoad.loadImiPet()
     }
 
     fun unloadTask() {

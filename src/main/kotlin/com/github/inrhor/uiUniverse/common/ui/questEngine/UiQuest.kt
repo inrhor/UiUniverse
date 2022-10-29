@@ -22,7 +22,7 @@ import taboolib.module.ui.openMenu
 import taboolib.module.ui.type.Basic
 import taboolib.module.ui.type.Linked
 
-class UiQuest(
+open class UiQuest(
     title: String = "", rows: Int = 6,
     button: MutableList<CustomButton> = mutableListOf(),
     template: String = "", slots: List<Int> = listOf(), icon: CustomButton = CustomButton(), data: String = ""):
@@ -39,7 +39,7 @@ class UiQuest(
         }
     }
 
-    fun openBasic(player: Player) {
+    open fun openBasic(player: Player) {
         player.openMenu<Basic>(player.evalString(title)) {
             rows(rows)
             button.forEach {
@@ -50,7 +50,7 @@ class UiQuest(
         }
     }
 
-    fun Linked<*>.linkedButton(player: Player, variable: (ScriptContext) -> Unit) {
+    open fun Linked<*>.linkedButton(player: Player, variable: (ScriptContext) -> Unit) {
         rows(rows)
         slots(this@UiQuest.slots)
         runButton.forEach {

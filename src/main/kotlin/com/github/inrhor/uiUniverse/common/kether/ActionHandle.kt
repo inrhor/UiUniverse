@@ -9,8 +9,12 @@ import taboolib.module.kether.KetherShell
 import taboolib.module.kether.ScriptContext
 import taboolib.platform.compat.replacePlaceholder
 
+object ActionSpace {
+    val name = listOf("QuestEngine", "adyeshach", "")
+}
+
 fun Player.eval(script: String, variable: (ScriptContext) -> Unit, get: (Any?) -> Any, def: Any): Any {
-    return KetherShell.eval(script, sender = adaptPlayer(this)) {
+    return KetherShell.eval(script, sender = adaptPlayer(this), namespace = ActionSpace.name) {
         variable(this)
     }.thenApply {
         get(it)
@@ -18,7 +22,7 @@ fun Player.eval(script: String, variable: (ScriptContext) -> Unit, get: (Any?) -
 }
 
 fun Player.eval(script: String, variable: (ScriptContext) -> Unit): Any {
-    return KetherShell.eval(script, sender = adaptPlayer(this)) {
+    return KetherShell.eval(script, sender = adaptPlayer(this), namespace = ActionSpace.name) {
         variable(this)
     }.thenApply {
         Coerce.toBoolean(it)

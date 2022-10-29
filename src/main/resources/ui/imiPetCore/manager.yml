@@ -1,0 +1,83 @@
+manager:
+  title: "宠物"
+  # 继承模板
+  template: home
+  data: pet-data
+  button:
+    -
+      id: back
+      slot: 8
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+      script: ui open home namespace imipet
+    -
+      id: follow
+      slot: 10
+      item:
+        material: LEAD
+        name: "&f                                    "
+        lore:
+          - "     &f跟随状态：&8{{pet follow lang}}"
+          - ""
+          - "     &7&o点击切换"
+          - ""
+      script: |
+        pet follow set check pet follow =? false
+        ui open manager namespace imipet
+    -
+      id: medical
+      slot: 11
+      item:
+        material: GOLDEN_APPLE
+        name: "&f                                    "
+        lore:
+          - "     &f血量：&8{{pet attribute current_hp}}&f/&8{{pet attribute max_hp}}"
+          - ""
+          - "     &7&o点击打开宠物医疗页面"
+          - ""
+      script: |
+        ui open medical namespace imipet
+    -
+      id: exp
+      slot: 12
+      item:
+        material: EXPERIENCE_BOTTLE
+        name: "&f                                    "
+        lore:
+          - "     &fLv.&8{{pet level}}"
+          - "     &f经验进度：&8{{pet current_exp}}&f/&8{{pet max_exp}}"
+          - ""
+          - "     &7&o点击刷新"
+          - ""
+      script: |
+        ui open manager namespace imipet
+    -
+      id: attribute
+      slot: 13
+      item:
+        material: BOW
+        name: "&f                                    "
+        lore:
+          - "     &c属性"
+          - "     &f速度：&8{{pet attribute speed}}"
+          - "     &f攻击：&8{{pet attribute attack}}"
+          - "     &f攻击速度：&8{{pet attribute attack_speed}}"
+          - ""
+          - "     &7&o点击刷新"
+          - ""
+      script: |
+        ui open manager namespace imipet
+    -
+      id: rename
+      slot: 14
+      item:
+        material: NAME_TAG
+        name: "&f                                    "
+        lore:
+          - "     &f价格：&81000"
+          - ""
+          - "     &7&o点击重命名"
+          - ""
+      script: |
+        input select pet-rename lang "INPUT_CHAT_RENAME" ui "manager"

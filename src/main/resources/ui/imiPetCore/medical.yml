@@ -1,82 +1,53 @@
-pet:
-  title: "宠物 | {{pet name}}"
-  # 继承模板
-  template: home
+medical:
+  title: "医疗宠物 | {{pet name}}"
+  rows: 4
+  data: pet-medical
   button:
+    -
+      id: setting
+      slot: 12
+      item:
+        material: APPLE
+        name: "&f                                    "
+        lore:
+          - "     &f治疗量：&8{{get value}}"
+          - "     &f所需费用：&8{{$ 'value*10'}}"
+          - ""
+      script: |
+        if check pet attribute current_hp < pet attribute max_hp then {
+          if check economy get >= $ "value*10" then {
+            economy del $ "value*10"
+            pet attribute current_hp add get value
+            ui open manager namespace imipet
+          }
+          else {
+            tell color "&c没有足够的余额"
+          }
+        }
+        else {
+          tell color "&c宠物已经有足够血量"
+        }
+    -
+      id: input
+      slot: 14
+      item:
+        material: OAK_SIGN
+        name: "&f                                    "
+        lore:
+          - "     &f点击设置治疗量"
+          - ""
+      script: |
+        input select "pet-medical" lang "INPUT_CHAT_DOUBLE" ui "medical"
+    - id: close
+      slot: 31
+      item:
+        material: BARRIER
+        name: "&c&l关闭"
+      script: ui close
     -
       id: back
       slot: 8
       item:
         material: BARRIER
         name: "&f&l返回"
-      script: ui open home namespace imipet
-    -
-      id: follow
-      slot: 10
-      item:
-        material: LEAD
-        name: "&f                                    "
-        lore:
-          - "     &f跟随状态：&8{{pet follow lang}}"
-          - ""
-          - "     &7&o点击切换"
-          - ""
-      script: |
-        pet follow set check pet follow =? false
-        ui open pet namespace imipet
-    -
-      id: medical
-      slot: 11
-      item:
-        material: GOLDEN_APPLE
-        name: "&f                                    "
-        lore:
-          - "     &f血量：&8{{pet attribute current_hp}}&f/&8{{pet attribute max_hp}}"
-          - ""
-          - "     &7&o点击打开宠物医疗页面"
-          - ""
-      script: |
-        ui open medical
-    -
-      id: exp
-      slot: 12
-      item:
-        material: EXPERIENCE_BOTTLE
-        name: "&f                                    "
-        lore:
-          - "     &fLv.&8{{pet level}}"
-          - "     &f经验进度：&8{{pet current_exp}}&f/&8{{pet max_exp}}"
-          - ""
-          - "     &7&o点击刷新"
-          - ""
-      script: |
-        ui open pet namespace imipet
-    -
-      id: attribute
-      slot: 13
-      item:
-        material: BOW
-        name: "&f                                    "
-        lore:
-          - "     &c属性"
-          - "     &f速度：&8{{pet attribute speed}}"
-          - "     &f攻击：&8{{pet attribute attack}}"
-          - "     &f攻击速度：&8{{pet attribute attack_speed}}"
-          - ""
-          - "     &7&o点击刷新"
-          - ""
-      script: |
-        ui open pet namespace imipet
-    -
-      id: rename
-      slot: 14
-      item:
-        material: NAME_TAG
-        name: "&f                                    "
-        lore:
-          - "     &f价格：&81000"
-          - ""
-          - "     &7&o点击重命名"
-          - ""
-      script: |
-        input select rename text [ "宠物重命名" "在下一行输入" ] line 3
+      script: ui open manager namespace imipet
