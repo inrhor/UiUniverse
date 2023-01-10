@@ -1,0 +1,14 @@
+skillHome:
+  title: "宠物 | 未装载技能"
+  # 继承模板
+  template: list
+  # 多页数据导入
+  data: unloadSkill
+  button:
+    -
+      id: back
+      slot: 8
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+      script: ui open skill namespace imipet

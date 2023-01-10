@@ -1,0 +1,47 @@
+skillHome:
+  title: "宠物 | 技能主页"
+  # 继承模板
+  template: home
+  button:
+    -
+      id: back
+      slot: 8
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+      script: ui open home namespace imipet
+    -
+      id: unload
+      slot: 10
+      item:
+        material: BARRIER
+        name: "&f                                    "
+        lore:
+          - "     &f&l未装载的技能"
+          - ""
+          - "     &8&o点击查看"
+          - ""
+      script: ui open skillUnload namespace imipet
+    -
+      id: point
+      slot: 11
+      item:
+        material: FEATHER
+        name: "&f                                    "
+        lore:
+          - "     &f&l技能点：&f{{pet skill point}}"
+          - ""
+          - "     &8&o点击选择赋予技能点"
+          - ""
+      script: ui open skillPoint namespace imipet
+    -
+      id: update
+      slot: 12
+      item:
+        material: TORCH
+        name: "&f                                    "
+        lore:
+          - "     &8&o点击选择升级技能"
+          - ""
+      script: ui open skillUpdate namespace imipet
+

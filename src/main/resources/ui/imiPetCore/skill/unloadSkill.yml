@@ -1,0 +1,30 @@
+skillHome:
+  title: "宠物 | 技能页"
+  # 继承模板
+  template: page
+  # 行
+  rows: 6
+  # 装载技能槽位，考虑个别不同装载量，超出槽位就下一页
+  slots: [20, 22, 24]
+  # 多页数据导入
+  data: loadSkill
+  button:
+    -
+      id: back
+      slot: 8
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+      script: ui open home namespace imipet
+    -
+      id: unload
+      slot: 45
+      item:
+        material: BARRIER
+        name: "&f                                    "
+        lore:
+          - "     &f&l未装载的技能"
+          - ""
+          - "     &8&o点击查看"
+          - ""
+      script: ui open skillUnload namespace imipet
