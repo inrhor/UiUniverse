@@ -1,7 +1,7 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("io.izzel.taboolib") version "1.42"
+    id("io.izzel.taboolib") version "1.51"
     id("org.jetbrains.kotlin.jvm") version "1.5.10"
 }
 
@@ -18,7 +18,7 @@ taboolib {
     install("expansion-javascript")
     install("expansion-command-helper")
     classifier = null
-    version = "6.0.9-114"
+    version = "6.0.10-31"
 }
 
 repositories {
@@ -31,7 +31,7 @@ dependencies {
     compileOnly("ink.ptms.core:v11902:11902-minimize:mapped")
     compileOnly("ink.ptms.core:v11902:11902-minimize:universal")
     compileOnly("com.github.inrhor:QuestEngine:3.0.0-beta5")
-    compileOnly("com.github.inrhor:imiPetCore:0.8.1-1")
+//    compileOnly("com.github.inrhor:imiPetCore:1.0.0-1")
     compileOnly(kotlin("stdlib"))
     compileOnly(fileTree("libs"))
 }

@@ -1,9 +1,11 @@
-updateSkill:
-  title: "宠物 | 选择升级技能"
+pointSkill:
+  title: "宠物 | 选择赋予技能点"
   # 继承模板
   template: list
   # 多页数据导入
-  data: updateSkill
+  data: point-skill
+  icon:
+    script: "skill point"
   button:
     -
       id: back

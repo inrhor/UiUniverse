@@ -1,4 +1,4 @@
-petSkill:
+skillSelectPet:
   title: "宠物 | 技能触发选择宠物"
   # 继承模板
   template: list

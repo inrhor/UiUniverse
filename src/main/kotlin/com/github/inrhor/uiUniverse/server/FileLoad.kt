@@ -14,7 +14,7 @@ object FileLoad {
 
     fun loadTemplate() {
         val folder = getFile("template", "TEMPLATE_EMPTY_FILE", true,
-            "list", "home")
+            "list", "home", "page")
         getFileList(folder).forEach {
             val yaml = Configuration.loadFromFile(it)
             yaml.getConfigurationSection("")?.getKeys(false)?.forEach { e ->
@@ -52,7 +52,8 @@ object FileLoad {
 
     fun loadImiPet() {
         val folder = getFile("ui/imiPetCore", "PET_EMPTY_FILE", true,
-            "home", "manager", "medical")
+            "home", "manager", "medical", "skill/loadSkill", "skill/skillManager",
+        "skill/skillPoint", "skill/unloadSkill", "skill/updateSkill", "skill/skillSelectPet")
         getFileList(folder).forEach {
             val yaml = Configuration.loadFromFile(it)
             yaml.getConfigurationSection("")?.getKeys(false)?.forEach { e ->

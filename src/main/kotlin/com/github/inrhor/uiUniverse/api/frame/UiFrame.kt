@@ -28,7 +28,7 @@ abstract class UiFrame(
 
 class CustomButton(
     val slot: Int = 0, val item: ItemElement = ItemElement(),
-    val script: String = "", val run: ButtonRun = ButtonRun.CUSTOM)
+    val script: String = "", val rightScript: String = "", val run: ButtonRun = ButtonRun.CUSTOM)
 
 enum class ButtonRun {
     CUSTOM, NEXT, PREVIOUS

@@ -81,3 +81,16 @@ manager:
           - ""
       script: |
         input select pet-rename lang "INPUT_CHAT_RENAME" ui "manager"
+    -
+      id: skill
+      slot: 15
+      item:
+        material: ENCHANTED_BOOK
+        name: "&f                                    "
+        lore:
+          - "     &f宠物技能管理"
+          - ""
+          - "     &7&o点击打开"
+          - ""
+      script: |
+        ui open skillManager namespace imipet

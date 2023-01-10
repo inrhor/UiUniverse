@@ -1,7 +1,8 @@
-skillHome:
-  title: "宠物 | 技能主页"
+skillManager:
+  title: "宠物 | 技能管理"
   # 继承模板
   template: home
+  data: skill-manager
   button:
     -
       id: back
@@ -11,8 +12,20 @@ skillHome:
         name: "&f&l返回"
       script: ui open home namespace imipet
     -
-      id: unload
+      id: load
       slot: 10
+      item:
+        material: BOW
+        name: "&f                                    "
+        lore:
+          - "     &f&l装载的技能"
+          - ""
+          - "     &8&o点击查看"
+          - ""
+      script: ui open loadSkill namespace imipet
+    -
+      id: unload
+      slot: 11
       item:
         material: BARRIER
         name: "&f                                    "
@@ -21,27 +34,27 @@ skillHome:
           - ""
           - "     &8&o点击查看"
           - ""
-      script: ui open skillUnload namespace imipet
+      script: ui open unloadSkill namespace imipet
     -
       id: point
-      slot: 11
+      slot: 12
       item:
         material: FEATHER
         name: "&f                                    "
         lore:
-          - "     &f&l技能点：&f{{pet skill point}}"
+          # - "     &f&l技能点：&f{{pet skill point}}"
           - ""
           - "     &8&o点击选择赋予技能点"
           - ""
-      script: ui open skillPoint namespace imipet
+      script: ui open pointSkill namespace imipet
     -
       id: update
-      slot: 12
+      slot: 13
       item:
         material: TORCH
         name: "&f                                    "
         lore:
           - "     &8&o点击选择升级技能"
           - ""
-      script: ui open skillUpdate namespace imipet
+      script: ui open updateSkill namespace imipet
 

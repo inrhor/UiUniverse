@@ -1,9 +1,11 @@
-skillHome:
-  title: "宠物 | 未装载技能"
+updateSkill:
+  title: "宠物 | 选择升级技能"
   # 继承模板
   template: list
   # 多页数据导入
-  data: unloadSkill
+  data: update-skill
+  icon:
+    script: "skill update"
   button:
     -
       id: back
@@ -11,4 +13,4 @@ skillHome:
       item:
         material: BARRIER
         name: "&f&l返回"
-      script: ui open skill namespace imipet
+      script: ui open skillHome namespace imipet
