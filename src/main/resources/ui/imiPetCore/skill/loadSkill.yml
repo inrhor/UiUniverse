@@ -2,13 +2,14 @@ loadSkill:
   title: "宠物 | 技能触发"
   # 继承模板
   template: page
-  # 行
-  rows: 6
   # 装载技能槽位，考虑个别不同装载量，超出槽位就下一页
   slots: [20, 22, 24]
   # 多页数据导入
   data: load-skill
   icon:
+    material: "ICON:imipet"
+    name: "&f"
+    lore: "ICON:load"
     script: "skill use"
     rightScript: "skill unload"
   button:

@@ -35,10 +35,10 @@ enum class ButtonRun {
 }
 
 data class ItemElement(
-    var material: XMaterial = XMaterial.APPLE,
-    var name: String = "", var lore: List<String> = listOf(), var modelData: Int = 0) {
+    var material: String = "APPLE",
+    var name: String = "", var lore: List<String> = listOf(), var modelData: Int = 0, val data: List<String> = listOf()) {
 
-    fun itemStack(player: Player, variable: (ScriptContext) -> Unit): ItemStack = buildItem(material) {
+    fun itemStack(player: Player, variable: (ScriptContext) -> Unit): ItemStack = buildItem(XMaterial.valueOf(material)) {
         val a = this@ItemElement
         name = player.evalString(a.name) {
             variable(it)

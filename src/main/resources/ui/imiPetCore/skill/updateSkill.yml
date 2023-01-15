@@ -13,4 +13,4 @@ updateSkill:
       item:
         material: BARRIER
         name: "&f&l返回"
-      script: ui open skillHome namespace imipet
+      script: ui open skillManager namespace imipet

@@ -1,24 +1,27 @@
 unloadSkill:
   title: "宠物 | 未装载技能"
   # 继承模板
-  template: page
+  template: list
   # 行
   rows: 6
-  # 装载技能槽位，考虑个别不同装载量，超出槽位就下一页
-  slots: [20, 22, 24]
   # 多页数据导入
   data: unload-skill
   icon:
-    script: "tell skill use"
-    rightScript: "tell skill unload"
+    item:
+      data:
+        - "MATERIAL"
+        - "LORE:unload"
+      name: "&f                                                  "
+    script: "tell 'skill use'"
+    rightScript: "tell 'skill unload'"
   button:
     -
       id: back
       slot: 8
       item:
         material: BARRIER
-        name: "&f&l返回"
-      script: ui open petSkill namespace imipet
+        name: "&f&l返回技能管理页面"
+      script: ui open skillManager namespace imipet
     -
       id: load
       slot: 45

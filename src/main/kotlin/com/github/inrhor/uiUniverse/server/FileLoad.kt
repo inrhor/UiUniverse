@@ -34,11 +34,13 @@ object FileLoad {
                 val t = ui.template
                 val tc = DataManager.templateContainer
                 if (t.isNotEmpty() && tc.containsKey(t)) {
-                    val temple = DataManager.templateContainer[ui.template]!!
-                    ui.slots = temple.slots
-                    ui.rows = temple.rows
-                    temple.button.forEach { b ->
-                        ui.button.add(b)
+                    val temple = DataManager.templateContainer[ui.template]
+                    if (temple != null) {
+                        ui.slots = ui.slots.ifEmpty { temple.slots }
+                        ui.rows = if (ui.slots.isEmpty()) temple.rows else ui.rows
+                        temple.button.forEach { b ->
+                            ui.button.add(b)
+                        }
                     }
                 }
                 ui.load()
@@ -62,8 +64,8 @@ object FileLoad {
                 val tc = DataManager.templateContainer
                 if (t.isNotEmpty() && tc.containsKey(t)) {
                     val temple = DataManager.templateContainer[ui.template]!!
-                    ui.slots = temple.slots
-                    ui.rows = temple.rows
+                    ui.slots = ui.slots.ifEmpty { temple.slots }
+                    ui.rows = if (ui.slots.isEmpty()) temple.rows else ui.rows
                     temple.button.forEach { b ->
                         ui.button.add(b)
                     }

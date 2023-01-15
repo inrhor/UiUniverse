@@ -10,7 +10,7 @@ skillManager:
       item:
         material: BARRIER
         name: "&f&l返回"
-      script: ui open home namespace imipet
+      script: ui open manager namespace imipet
     -
       id: load
       slot: 10
@@ -27,7 +27,7 @@ skillManager:
       id: unload
       slot: 11
       item:
-        material: BARRIER
+        material: ARROW
         name: "&f                                    "
         lore:
           - "     &f&l未装载的技能"

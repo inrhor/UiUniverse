@@ -82,7 +82,7 @@ open class UiQuest(
         data?.forEach {
             val s = it.uppercase()
             if (s.contains("ICON:")) {
-                i.material = XMaterial.valueOf(s.split(":")[1])
+                i.material = s.split(":")[1]
             }else if (s.contains("MODEL-DATA:")) {
                 i.modelData = s.split(":")[1].toInt()
             }
