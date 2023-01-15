@@ -1,0 +1,17 @@
+loadSlot:
+  title: "宠物 | 选择装载的槽位"
+  # 继承模板
+  template: page
+  slots: [20, 22, 24]
+  # 多页数据导入
+  data: load-slot
+  icon:
+    item:
+      data:
+        - "MATERIAL:loadSlot"
+        - "LORE:loadSlot"
+      name: "&f                                                  "
+      lore:
+        - "     &8&o点击装载技能到此槽位"
+        - "&f"
+    script: "tell skill use"
