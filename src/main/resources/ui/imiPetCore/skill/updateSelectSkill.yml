@@ -1,0 +1,23 @@
+updateSelectSkill:
+  title: "宠物 | 选择升级到新的技能"
+  # 继承模板
+  template: list
+  # 多页数据导入
+  data: select-update-skill
+  icon:
+    item:
+      data:
+        - "MATERIAL:updateSelect"
+        - "LORE:updateSelect"
+      name: "&f                                                  "
+    script: |
+      petSkill update
+      ui open skillManager namespace imipet
+  button:
+    -
+      id: back
+      slot: 8
+      item:
+        material: BARRIER
+        name: "&f&l返回"
+      script: ui open updateSkill namespace imipet
