@@ -9,11 +9,10 @@ unloadSkill:
   icon:
     item:
       data:
-        - "MATERIAL"
+        - "MATERIAL:unload"
         - "LORE:unload"
       name: "&f                                                  "
-    script: "tell 'skill use'"
-    rightScript: "tell 'skill unload'"
+    script: ui open loadSlot namespace imipet
   button:
     -
       id: back

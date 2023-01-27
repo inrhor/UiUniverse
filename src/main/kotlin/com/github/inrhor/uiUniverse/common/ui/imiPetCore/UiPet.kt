@@ -10,8 +10,10 @@ import cn.inrhor.imipetcore.api.manager.SkillManager.getUpdateSkills
 import cn.inrhor.imipetcore.api.manager.SkillManager.icon
 import cn.inrhor.imipetcore.api.manager.SkillManager.loadSkill
 import cn.inrhor.imipetcore.api.manager.SkillManager.skillOption
+import cn.inrhor.imipetcore.api.manager.SkillManager.treeSkillOption
 import cn.inrhor.imipetcore.common.database.data.PetData
 import cn.inrhor.imipetcore.common.database.data.SkillData
+import cn.inrhor.imipetcore.common.option.SkillOption
 import com.github.inrhor.uiUniverse.api.frame.ButtonRun
 import com.github.inrhor.uiUniverse.api.frame.CustomButton
 import com.github.inrhor.uiUniverse.api.frame.ItemElement
@@ -20,7 +22,6 @@ import com.github.inrhor.uiUniverse.common.kether.eval
 import com.github.inrhor.uiUniverse.common.kether.evalString
 import com.github.inrhor.uiUniverse.common.ui.questEngine.UiQuest
 import org.bukkit.entity.Player
-import taboolib.common.platform.function.info
 import taboolib.module.kether.ScriptContext
 import taboolib.module.ui.openMenu
 import taboolib.module.ui.type.Basic
@@ -44,7 +45,7 @@ class UiPet(
             "update-skill" -> openUpdateSkill(player, any[0] as PetData)
             "point-skill" -> openPointSkill(player, any[0] as PetData)
             "load-slot" -> openLoadSlot(player, any[0] as PetData, any[1] as SkillData)
-//            "select-update-skill" ->
+            "select-update-skill" -> openSelectUpdateSkill(player, any[0] as PetData, any[1] as SkillData)
             else -> openBasic(player)
         }
     }
@@ -59,7 +60,7 @@ class UiPet(
         it.rootFrame().variables()["@PetData"] = petData
     }
 
-    fun petVar(it: ScriptContext, petData: PetData, skillData: SkillData) {
+    private fun petVar(it: ScriptContext, petData: PetData, skillData: SkillData) {
         it.rootFrame().variables()["@IdSkill"] = skillData.id
         it.rootFrame().variables()["@PetData"] = petData
         it.rootFrame().variables()["@PetSkillData"] = skillData
@@ -150,23 +151,16 @@ class UiPet(
     }
 
     fun openLoadSkill(player: Player, petData: PetData) {
-        info("get "+petData.getLoadSkills().size)
-        info("getSSSSSSS "+petData.skillSystemData.loadSkill.size)
-        info("SSSSS  "+petData.skillSystemData.loadSkill)
         openSkills(player, petData, petData.getLoadSkills())
     }
 
-    fun iconItem(skillData: SkillData): ItemElement {
+    fun iconItem(imIcon: cn.inrhor.imipetcore.common.option.ItemElement): ItemElement {
         // ui 的 icon
         val i = icon.item
-        // imipet 的 icon
-        val imIcon = skillData.icon()
-        info("iiii $i")
-        info("imIcon $imIcon")
+        // imIcon -> imipet 的 icon
         // 根据ui icon匹配imipet id icon，找不到就显示imipet skill icon 否则显示 ui icon
         val item = ItemElement(i.material, i.name, i.lore, i.modelData)
         i.data.forEach {
-            info("ititit $it")
             val ia = it.uppercase()
             if (ia.startsWith("MATERIAL:")) {
                 item.material = it.getIdIcon()?.material?: imIcon.material
@@ -202,7 +196,7 @@ class UiPet(
                 skills
             }
             onGenerate { player, element, _, _ ->
-                val item = iconItem(element)
+                val item = iconItem(element.icon())
                 item.itemStack(player) {
                     petVar(it, petData, element)
                 }
@@ -221,8 +215,6 @@ class UiPet(
     }
 
     fun openSkills(player: Player, petData: PetData, skills: MutableList<SkillData>) {
-        info("skills+++++  "+skills.size)
-        info("skillsData+++   $skills")
         player.openMenu<Linked<SkillData>>(player.evalString(title)) {
             linkedButton(player) {
                 skillPetVar(it, petData)
@@ -231,7 +223,7 @@ class UiPet(
                 skills
             }
             onGenerate { player, element, _, _ ->
-                val item = iconItem(element)
+                val item = iconItem(element.icon())
                 item.itemStack(player) {
                     petVar(it, petData, element)
                 }
@@ -255,7 +247,6 @@ class UiPet(
     override fun Linked<*>.linkedButton(player: Player, variable: (ScriptContext) -> Unit) {
         rows(rows)
         slots(this@UiPet.slots)
-        info("slots "+this@UiPet.slots)
         runButton.forEach {
             if (it.run == ButtonRun.PREVIOUS) {
                 setPreviousPage(it.slot) { _, _ ->
@@ -284,8 +275,37 @@ class UiPet(
         openSkills(player, petData, petData.getUpdateSkills())
     }
 
+    private fun skillOptionDataVar(it: ScriptContext, petData: PetData, skillData: SkillData, skillOption: SkillOption) {
+        it.rootFrame().variables()["@IdSkill"] = skillOption.id
+        it.rootFrame().variables()["@PetData"] = petData
+        it.rootFrame().variables()["@PetSkillData"] = skillData
+    }
+
     fun openSelectUpdateSkill(player: Player, petData: PetData, skillData: SkillData) {
-//        openSkills(player, petData, skillData.id.skillOption().tree.select)
+        val tree = skillData.treeSkillOption()
+        player.openMenu<Linked<SkillOption>>(player.evalString(title)) {
+            linkedButton(player) {
+                skillPetVar(it, petData)
+            }
+            elements {
+                tree
+            }
+            onGenerate { player, element, _, _ ->
+                val item = iconItem(element.icon)
+                item.itemStack(player) {
+                    skillOptionDataVar(it, petData, skillData, element)
+                }
+            }
+            onClick { event, element ->
+                val a = if (event.clickEvent().isRightClick) icon.rightScript else icon.script
+                event.clicker.eval(a) { s ->
+                    skillOptionDataVar(s, petData, skillData, element)
+                    val any = arrayOf(petData, skillData, element)
+                    s.rootFrame().variables().set("__UiListData__", any)
+                }
+                event.clickEvent().isCancelled = true
+            }
+        }
     }
 
     fun openPointSkill(player: Player, petData: PetData) {

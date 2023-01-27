@@ -5,7 +5,12 @@ updateSkill:
   # 多页数据导入
   data: update-skill
   icon:
-    script: "skill update"
+    item:
+      data:
+        - "MATERIAL:update"
+        - "LORE:update"
+      name: "&f                                                  "
+    script: "ui open updateSelectSkill namespace imipet"
   button:
     -
       id: back

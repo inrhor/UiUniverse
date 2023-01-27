@@ -5,7 +5,14 @@ pointSkill:
   # 多页数据导入
   data: point-skill
   icon:
-    script: "skill point"
+    item:
+      data:
+        - "MATERIAL:point"
+        - "LORE:point"
+      name: "&f                                                  "
+    script: |
+      petSkill point add 1
+      ui open pointSkill namespace imipet
   button:
     -
       id: back

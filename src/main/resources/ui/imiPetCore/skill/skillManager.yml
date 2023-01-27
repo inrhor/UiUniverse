@@ -42,7 +42,7 @@ skillManager:
         material: FEATHER
         name: "&f                                    "
         lore:
-          # - "     &f&l技能点：&f{{pet skill point}}"
+          - "     &f&l拥有技能点：&f"
           - ""
           - "     &8&o点击选择赋予技能点"
           - ""

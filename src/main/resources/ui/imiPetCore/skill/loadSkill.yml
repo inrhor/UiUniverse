@@ -7,11 +7,15 @@ loadSkill:
   # 多页数据导入
   data: load-skill
   icon:
-    material: "ICON:imipet"
-    name: "&f"
-    lore: "ICON:load"
-    script: "skill use"
-    rightScript: "skill unload"
+    item:
+      data:
+        - "MATERIAL:load"
+        - "LORE:load"
+      name: "&f                                                  "
+    script: "tell skill use"
+    rightScript: |
+      petSkill unload
+      ui open loadSkill namespace imipet
   button:
     -
       id: back
