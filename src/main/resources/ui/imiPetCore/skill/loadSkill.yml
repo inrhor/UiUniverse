@@ -12,7 +12,11 @@ loadSkill:
         - "MATERIAL:load"
         - "LORE:load"
       name: "&f                                                  "
-    script: "tell skill use"
+    script: |
+      if check petSkill coolDown bool =? false then {
+        ui close
+      }
+      petSkill launch
     rightScript: |
       petSkill unload
       ui open loadSkill namespace imipet
